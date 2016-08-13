@@ -28,6 +28,7 @@ public class EmployeeController extends BaseController<Integer, Employee> {
     @ResponseBody
     public ResponseEntity getEmployee(@PathVariable("id") Integer id) {
         try {
+            LOG.info("Get employee with id:" + id);
             Employee employee = employeeService.get(id);
             return ResponseEntity.ok(employee);
         } catch (ResourceNotFoundException resNotFoundException) {
@@ -41,7 +42,9 @@ public class EmployeeController extends BaseController<Integer, Employee> {
     @ResponseBody
     public ResponseEntity create(@RequestBody Employee employee) {
         try {
+            LOG.info("Creating new employee.");
             Integer id = employeeService.create(employee);
+            LOG.info("New employee was created with id:" + id);
             return ResponseEntity.noContent().header("Location", String.valueOf(id)).build();
         } catch (ResourceAlreadyExistsException resExistException) {
             LOG.debug(resExistException);
@@ -54,6 +57,7 @@ public class EmployeeController extends BaseController<Integer, Employee> {
     @ResponseBody
     public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Employee employee) {
         try {
+            LOG.debug("Update employee with id:" + id);
             Employee updatedEmployee = employeeService.update(id, employee);
             return ResponseEntity.ok(updatedEmployee);
         } catch (ResourceNotFoundException resNotFoundException) {
@@ -68,6 +72,7 @@ public class EmployeeController extends BaseController<Integer, Employee> {
     @ResponseBody
     public ResponseEntity delete(@PathVariable("id") Integer id) {
         try {
+            LOG.debug("Delete employee with id:" + id);
             employeeService.delete(id);
             return ResponseEntity.ok("Resource with id: " + id + " was successfully deleted.");
         } catch(ResourceNotFoundException resNotFoundException) {
