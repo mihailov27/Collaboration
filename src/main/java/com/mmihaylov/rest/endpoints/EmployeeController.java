@@ -6,6 +6,7 @@ import com.mmihaylov.rest.exceptions.ResourceNotFoundException;
 import com.mmihaylov.rest.services.EmployeeService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,7 @@ public class EmployeeController extends BaseController<Integer, Employee> {
     }
 
     // GET
-    @RequestMapping(method = RequestMethod.GET, value = "/get/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity getEmployee(@PathVariable("id") Integer id) {
         try {
