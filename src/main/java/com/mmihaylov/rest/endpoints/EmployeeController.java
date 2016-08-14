@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/employee")
-public class EmployeeController extends BaseController<Integer, Employee> {
+public class EmployeeController extends BaseController<Long, Employee> {
 
     private static final Logger LOG = Logger.getLogger(EmployeeController.class);
 
@@ -27,7 +27,7 @@ public class EmployeeController extends BaseController<Integer, Employee> {
     // GET
     @RequestMapping(method = RequestMethod.GET, value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity getEmployee(@PathVariable("id") Integer id) {
+    public ResponseEntity getEmployee(@PathVariable("id") Long id) {
         try {
             LOG.info("Get employee with id:" + id);
             Employee employee = employeeService.get(id);
@@ -44,7 +44,7 @@ public class EmployeeController extends BaseController<Integer, Employee> {
     public ResponseEntity create(@RequestBody Employee employee) {
         try {
             LOG.info("Creating new employee.");
-            Integer id = employeeService.create(employee);
+            Long id = employeeService.create(employee);
             LOG.info("New employee was created with id:" + id);
             return ResponseEntity.noContent().header("Location", String.valueOf(id)).build();
         } catch (ResourceAlreadyExistsException resExistException) {
@@ -56,7 +56,7 @@ public class EmployeeController extends BaseController<Integer, Employee> {
     // PUT
     @RequestMapping(method = RequestMethod.PUT, value="/update/{id}")
     @ResponseBody
-    public ResponseEntity update(@PathVariable("id") Integer id, @RequestBody Employee employee) {
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Employee employee) {
         try {
             LOG.debug("Update employee with id:" + id);
             Employee updatedEmployee = employeeService.update(id, employee);
@@ -67,11 +67,10 @@ public class EmployeeController extends BaseController<Integer, Employee> {
         }
     }
 
-
     // DELETE
     @RequestMapping(method = RequestMethod.DELETE, value="/delete/{id}")
     @ResponseBody
-    public ResponseEntity delete(@PathVariable("id") Integer id) {
+    public ResponseEntity delete(@PathVariable("id") Long id) {
         try {
             LOG.debug("Delete employee with id:" + id);
             employeeService.delete(id);

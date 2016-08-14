@@ -6,7 +6,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+        <param-value>/WEB-INF/spring-context.xml</param-value>
     </context-param>
 
     <servlet>
@@ -25,9 +25,6 @@
         <servlet-name>mvc-dispatcher</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-
-
-
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/mvc-dispatcher-servlet.xml")
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring-context.xml")
 @WebAppConfiguration
 public class EmployeeControllerTest {
 
@@ -41,6 +41,7 @@ public class EmployeeControllerTest {
         Employee employee = new Employee();
         employee.setFirstName("Mihail");
         employee.setLastName("Mihaylov");
+        employee.setEmail("mmihaylov@gmail.com");
         employee.setPosition("Java developer");
         // post
         String employeeAsJson = objectMapper.writeValueAsString(employee);
@@ -53,7 +54,7 @@ public class EmployeeControllerTest {
                 .andExpect(jsonPath("$.id", is(0)))
                 .andExpect(jsonPath("$.firstName", is("Mihail")))
                 .andExpect(jsonPath("$.lastName", is("Mihaylov")))
+                .andExpect(jsonPath("$.email", is("mmihaylov@gmail.com")))
                 .andExpect(jsonPath("$.position", is("Java developer")));
-
     }
 }

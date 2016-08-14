@@ -2,24 +2,39 @@ package com.mmihaylov.rest.entities;
 
 import java.util.Date;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "employee")
 public class Employee {
 
-    private Integer id;
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(name="first_name", nullable = false)
     private String firstName;
+
+    @Column(name="last_name", nullable = false)
     private String lastName;
+
+    @Column(name="position", nullable = false)
     private String position;
 
-    //@JsonIgnore
+    @Column(name="email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name="creation_date", nullable = false, updatable = false)
     private Date creationDate;
 
-    //@JsonIgnore
+    @Column(name="last_update_date")
     private Date lastUpdateDate;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -45,6 +60,14 @@ public class Employee {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getCreationDate() {

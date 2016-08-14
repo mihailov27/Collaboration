@@ -11,7 +11,9 @@
     <properties>
         <log4j.version>1.2.17</log4j.version>
         <spring.version>4.3.2.RELEASE</spring.version>
+        <spring.data.version>1.10.2.RELEASE</spring.data.version>
         <jackson.version>2.7.0</jackson.version>
+        <hsqldb.version>1.8.0.7</hsqldb.version>
     </properties>
 
     <dependencies>
@@ -42,6 +44,19 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!-- Spring data jpa -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>5.1.0.Final</version>
+            <!--<scope>runtime</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring.data.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -54,6 +69,13 @@
             <version>3.1.0</version>
             <scope>compile</scope>
         </dependency>
+        <!-- HSQL database -->
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>${hsqldb.version}</version>
+            <scope>runtime</scope>
+        </dependency>
         <!-- Junit -->
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
@@ -61,7 +83,6 @@
             <version>2.2.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>

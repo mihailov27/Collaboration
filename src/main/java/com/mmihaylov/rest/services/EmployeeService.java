@@ -6,11 +6,11 @@ import com.mmihaylov.rest.exceptions.ResourceNotFoundException;
 
 public interface EmployeeService {
 
-    Employee get(Integer id) throws ResourceNotFoundException;
+    Employee get(Long id) throws ResourceNotFoundException;
 
-    Integer create(Employee employee) throws ResourceAlreadyExistsException;
+    Long create(Employee employee) throws ResourceAlreadyExistsException;
 
-    Employee update(Integer id, Employee employee) throws ResourceNotFoundException;
+    Employee update(Long id, Employee employee) throws ResourceNotFoundException;
 
-    void delete(Integer id) throws ResourceNotFoundException;
+    void delete(Long id) throws ResourceNotFoundException;
 }
