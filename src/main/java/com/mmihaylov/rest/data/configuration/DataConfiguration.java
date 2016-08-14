@@ -1,7 +1,10 @@
 package com.mmihaylov.rest.data.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -18,9 +21,13 @@ import java.util.Properties;
 
 /** Data configuration for spring data with jpa */
 @Configuration
+@PropertySource("classpath:data-config.properties")
 @EnableJpaRepositories(basePackages = {"com.mmihaylov.rest.data.repositories"})
 @EnableTransactionManagement
 public class DataConfiguration {
+
+    @Autowired
+    Environment environment;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -35,18 +42,18 @@ public class DataConfiguration {
 
    private Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+        properties.setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
         return properties;
     }
 
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.hsqldb.jdbcDriver");
-        dataSource.setUrl("jdbc:hsqldb:mem:test-db");
-        dataSource.setUsername("sa");
-        dataSource.setPassword("");
+        dataSource.setDriverClassName(environment.getProperty("jdbc.driver"));
+        dataSource.setUrl(environment.getProperty("jdbc.url"));
+        dataSource.setUsername(environment.getProperty("jdbc.username"));
+        dataSource.setPassword(environment.getProperty("jdbc.password"));
         return dataSource;
     }
 
