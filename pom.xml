@@ -14,6 +14,7 @@
         <spring.data.version>1.10.2.RELEASE</spring.data.version>
         <jackson.version>2.7.0</jackson.version>
         <hsqldb.version>1.8.0.7</hsqldb.version>
+        <postgre-sql.version>9.4.1208.jre7</postgre-sql.version>
     </properties>
 
     <dependencies>
@@ -70,10 +71,19 @@
             <scope>compile</scope>
         </dependency>
         <!-- HSQL database -->
+        <!--
         <dependency>
             <groupId>hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>${hsqldb.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        -->
+        <!-- Postgre sql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgre-sql.version}</version>
             <scope>runtime</scope>
         </dependency>
         <!-- Junit -->

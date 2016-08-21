@@ -6,6 +6,7 @@ import com.mmihaylov.rest.exceptions.ResourceNotFoundException;
 import com.mmihaylov.rest.services.EmployeeService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class EmployeeController extends BaseController<Long, Employee> {
         this.employeeService = employeeService;
     }
 
-    // GET
+    // GET BY ID
     @RequestMapping(method = RequestMethod.GET, value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity getEmployee(@PathVariable("id") Long id) {
@@ -35,6 +36,20 @@ public class EmployeeController extends BaseController<Long, Employee> {
         } catch (ResourceNotFoundException resNotFoundException) {
             LOG.debug(resNotFoundException);
             return noResourceFound(id);
+        }
+    }
+
+    // GET BY EMAIL (IT IS ASSUMED THAT EMAIL IS UNIQUE PER USER)
+    @RequestMapping(method = RequestMethod.GET, value = "/get-by-email", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity getEmployee(@RequestParam("email") String email) {
+        try {
+            LOG.info("Get employee with email:" + email);
+            Employee employee = employeeService.get(email);
+            return ResponseEntity.ok(employee);
+        } catch (ResourceNotFoundException resNotFoundException) {
+            LOG.debug(resNotFoundException);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No employee found with given email:" + email);
         }
     }
 

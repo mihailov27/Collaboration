@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "employees")
 public class Employee {
 
     @Id
@@ -18,11 +18,18 @@ public class Employee {
     @Column(name="last_name", nullable = false)
     private String lastName;
 
-    @Column(name="position", nullable = false)
+    @Column(name="job_position", nullable = false)
     private String position;
 
     @Column(name="email", nullable = false, unique = true)
     private String email;
+
+    @Column(name = "gender", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @Column(name="date_of_birth", nullable = false)
+    private Date dateOfBirth;
 
     @Column(name="creation_date", nullable = false, updatable = false)
     private Date creationDate;
@@ -84,5 +91,21 @@ public class Employee {
 
     public void setLastUpdateDate(Date lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }
