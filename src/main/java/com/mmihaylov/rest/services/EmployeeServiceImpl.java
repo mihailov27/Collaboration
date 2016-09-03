@@ -1,17 +1,23 @@
 package com.mmihaylov.rest.services;
 
 import com.mmihaylov.rest.data.repositories.EmployeeRepository;
+import com.mmihaylov.rest.endpoints.sorting.Direction;
+import com.mmihaylov.rest.endpoints.sorting.EmployeeSorting;
 import com.mmihaylov.rest.entities.Employee;
 import com.mmihaylov.rest.exceptions.ResourceAlreadyExistsException;
 import com.mmihaylov.rest.exceptions.ResourceNotFoundException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -101,5 +107,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteAll() {
         LOG.info("Delete all records in employee table");
         employeeRepository.deleteAll();
+    }
+
+    @Override
+    public List<Employee> getEmployees(int pageIndex, int pageSize, EmployeeSorting employeeSorting, Direction direction) {
+        Sort.Direction _direction = null;
+        if(Direction.ASC.equals(direction)) {
+            _direction = Sort.Direction.ASC;
+        } else if(Direction.DESC.equals(direction)) {
+            _direction = Sort.Direction.DESC;
+        }
+        Sort sort = new Sort(_direction, employeeSorting.getColumn());
+        PageRequest pageRequest = new PageRequest(pageIndex, pageSize, sort);
+        Page<Employee> result = employeeRepository.findAll(pageRequest);
+        List<Employee> listOfEmployees = result.getContent();
+        return listOfEmployees;
     }
 }

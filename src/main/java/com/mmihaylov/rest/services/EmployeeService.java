@@ -1,8 +1,12 @@
 package com.mmihaylov.rest.services;
 
+import com.mmihaylov.rest.endpoints.sorting.Direction;
+import com.mmihaylov.rest.endpoints.sorting.EmployeeSorting;
 import com.mmihaylov.rest.entities.Employee;
 import com.mmihaylov.rest.exceptions.ResourceAlreadyExistsException;
 import com.mmihaylov.rest.exceptions.ResourceNotFoundException;
+
+import java.util.List;
 
 public interface EmployeeService {
 
@@ -23,5 +27,7 @@ public interface EmployeeService {
 
     /* use only for tests - it is dangerous operation. */
     void deleteAll();
+
+    List<Employee> getEmployees(int pageIndex, int pageSize, EmployeeSorting employeeSorting, Direction direction);
 
 }

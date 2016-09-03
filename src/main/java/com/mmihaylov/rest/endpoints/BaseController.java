@@ -20,4 +20,8 @@ public abstract class BaseController<ID, T> {
     protected final ResponseEntity conflictResponse() {
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict with existing resource.");
     }
+
+    protected final ResponseEntity badRequest(String errorMessage) {
+        return ResponseEntity.badRequest().body(errorMessage);
+    }
 }
