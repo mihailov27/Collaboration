@@ -1,4 +1,4 @@
-package com.mmihaylov.rest.endpoints;
+package com.mmihaylov.rest.web;
 
 import com.mmihaylov.rest.services.MathService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -107,6 +107,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>SpringWebApp</finalName>
+        <finalName>collaboration-rest-services</finalName>
     </build>
 </project>

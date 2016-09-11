@@ -1,7 +1,6 @@
-package com.mmihaylov.rest.endpoints.util;
+package com.mmihaylov.rest.sorting.util;
 
-import com.mmihaylov.rest.endpoints.sorting.Direction;
-import com.mmihaylov.rest.endpoints.sorting.EmployeeSorting;
+import com.mmihaylov.rest.sorting.Direction;
 
 import java.beans.PropertyEditorSupport;
 

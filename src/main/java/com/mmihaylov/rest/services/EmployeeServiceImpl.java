@@ -1,8 +1,9 @@
 package com.mmihaylov.rest.services;
 
 import com.mmihaylov.rest.data.repositories.EmployeeRepository;
-import com.mmihaylov.rest.endpoints.sorting.Direction;
-import com.mmihaylov.rest.endpoints.sorting.EmployeeSorting;
+import com.mmihaylov.rest.dto.PageOfEntitiesDto;
+import com.mmihaylov.rest.sorting.Direction;
+import com.mmihaylov.rest.sorting.EmployeeSorting;
 import com.mmihaylov.rest.entities.Employee;
 import com.mmihaylov.rest.exceptions.ResourceAlreadyExistsException;
 import com.mmihaylov.rest.exceptions.ResourceNotFoundException;
@@ -110,7 +111,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployees(int pageIndex, int pageSize, EmployeeSorting employeeSorting, Direction direction) {
+    public PageOfEntitiesDto<Employee> getEmployees(int pageIndex, int pageSize, EmployeeSorting employeeSorting, Direction direction) {
         Sort.Direction _direction = null;
         if(Direction.ASC.equals(direction)) {
             _direction = Sort.Direction.ASC;
@@ -121,6 +122,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         PageRequest pageRequest = new PageRequest(pageIndex, pageSize, sort);
         Page<Employee> result = employeeRepository.findAll(pageRequest);
         List<Employee> listOfEmployees = result.getContent();
-        return listOfEmployees;
+
+        int numOfPages = result.getTotalPages();
+        long totalNumOfElements = result.getTotalElements();
+        int numOfElements = result.getNumberOfElements();
+        PageOfEntitiesDto<Employee> pageOfEntitiesDto = new PageOfEntitiesDto<Employee>();
+        pageOfEntitiesDto.setEntities(listOfEmployees);
+        pageOfEntitiesDto.setNumOfEntities(totalNumOfElements);
+        pageOfEntitiesDto.setNumOfPages(numOfPages);
+        pageOfEntitiesDto.setPage(pageIndex);
+        pageOfEntitiesDto.setPageSize(numOfElements);
+        return pageOfEntitiesDto;
     }
 }

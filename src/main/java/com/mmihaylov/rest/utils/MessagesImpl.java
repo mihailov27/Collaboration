@@ -1,5 +1,6 @@
-package com.mmihaylov.rest.endpoints;
+package com.mmihaylov.rest.utils;
 
+import com.mmihaylov.rest.utils.Messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

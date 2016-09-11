@@ -1,4 +1,4 @@
-package com.mmihaylov.rest.endpoints.sorting;
+package com.mmihaylov.rest.sorting;
 
 /**
  * Created by mmihaylov on 9/3/16.

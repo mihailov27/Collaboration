@@ -1,4 +1,4 @@
-package com.mmihaylov.rest.endpoints;
+package com.mmihaylov.rest.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

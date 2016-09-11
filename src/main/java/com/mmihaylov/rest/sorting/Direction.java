@@ -1,4 +1,4 @@
-package com.mmihaylov.rest.endpoints.sorting;
+package com.mmihaylov.rest.sorting;
 
 /* Direction of the sorting - DESC or ASC. */
 public enum Direction {

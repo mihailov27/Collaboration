@@ -1,13 +1,15 @@
-package com.mmihaylov.rest.endpoints;
+package com.mmihaylov.rest.web;
 
-import com.mmihaylov.rest.endpoints.sorting.Direction;
-import com.mmihaylov.rest.endpoints.sorting.EmployeeSorting;
-import com.mmihaylov.rest.endpoints.util.DirectionEditor;
-import com.mmihaylov.rest.endpoints.util.EmployeeSortingEditor;
+import com.mmihaylov.rest.dto.PageOfEntitiesDto;
+import com.mmihaylov.rest.sorting.Direction;
+import com.mmihaylov.rest.sorting.EmployeeSorting;
+import com.mmihaylov.rest.sorting.util.DirectionEditor;
+import com.mmihaylov.rest.sorting.util.EmployeeSortingEditor;
 import com.mmihaylov.rest.entities.Employee;
 import com.mmihaylov.rest.exceptions.ResourceAlreadyExistsException;
 import com.mmihaylov.rest.exceptions.ResourceNotFoundException;
 import com.mmihaylov.rest.services.EmployeeService;
+import com.mmihaylov.rest.utils.Messages;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
@@ -101,15 +102,8 @@ public class EmployeeController extends BaseController<Long, Employee> {
         if(pageSize <= 0 || pageSize > 40) {
             return badRequest("Request parameter 'page-size' must be a positive integer between range of 1 and 40.");
         }
-        /*
-        StringBuilder response = new StringBuilder();
-        response.append("page: " + pageIndex);
-        response.append(", size: " + pageSize);
-        response.append(", sort by: " + sortBy.toString());
-        response.append(", direction: " + direction.toString());
-        */
-        List<Employee> employeeList = employeeService.getEmployees(pageIndex, pageSize, sortBy, direction);
-        return ResponseEntity.ok(employeeList);
+        PageOfEntitiesDto<Employee> pageOfEmployee = employeeService.getEmployees(pageIndex, pageSize, sortBy, direction);
+        return ResponseEntity.ok(pageOfEmployee);
     }
 
     // PUT

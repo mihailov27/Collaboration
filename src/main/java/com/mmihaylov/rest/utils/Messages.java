@@ -1,4 +1,4 @@
-package com.mmihaylov.rest.endpoints;
+package com.mmihaylov.rest.utils;
 
 public interface Messages {
 
