@@ -1,10 +1,5 @@
 // define the Collaboration app module.
-var collabAppModule = angular.module("collabApp", []);
-
-// header controller
-var headerController = collabAppModule.controller("headerController", function($scope) {
-
-});
+var collabAppModule = angular.module("collabApp", ['fsm']);
 
 // main controller
 var mainController = collabAppModule.controller("mainController", function($scope) {

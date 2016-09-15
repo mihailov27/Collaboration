@@ -4,18 +4,19 @@
     <!-- styles -->
     <link rel="stylesheet" type="text/css" href="resources/styles/main.css">
     <!-- import of Angular JS library -->
-    <script src="resources/lib/angular.min.js"></script>
+    <script src="resources/bower_components/angular/angular.min.js"></script>
     <!-- import of custom script -->
     <script src="resources/js/main.js"></script>
 </head>
 <body ng-app="collabApp">
-<!-- header -->
-<div ng-controller="headerController">
-    
-</div>
-<!-- main body -->
-<div ng-controller="mainController">
-    <h2>{{helloTo.title}} some static text here.</h2>
+<!-- main panel-->
+<div ng-controller="mainController" id="root-panel">
+    <div id="header-panel">
+        <div id="search_bar"></div>
+    </div>
+    <div id="content-panel">
+        <h2>{{helloTo.title}} some static text here.</h2>
+    </div>
 </div>
 </body>
 </html>
