@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS employees (
     email                                   VARCHAR(40) NOT NULL,
     creation_date                           TIMESTAMP NOT NULL,
     last_update_date                        TIMESTAMP,
+    profile_image                           VARCHAR(50),
     CONSTRAINT unique_email_address         UNIQUE(email),
     CONSTRAINT check_gender                 CHECK(gender IN ('male','female'))
 );

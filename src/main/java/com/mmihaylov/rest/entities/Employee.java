@@ -37,6 +37,9 @@ public class Employee {
     @Column(name="last_update_date")
     private Date lastUpdateDate;
 
+    @Column(name="profile_image")
+    private String profileImage;
+
     public Long getId() {
         return id;
     }
@@ -107,5 +110,13 @@ public class Employee {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 }
